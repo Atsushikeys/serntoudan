@@ -16,15 +16,19 @@ function doPost(e) {
   // WebHookで受信した応答用Token
   var replyToken = JSON.parse(e.postData.contents).events[0].replyToken;
   logSheet.getRange(1, 1).setValue("WebHookで受信した応答用Token取得OK");
+  logSheet.getRange(2, 1).setValue(replyToken);
   // eventのtypeを取得
   var eventType = JSON.parse(e.postData.contents).events[0].type;
   logSheet.getRange(1, 1).setValue("eventType取得OK");
-  
+  logSheet.getRange(2, 1).setValue(eventType);
+
   //followイベントなら、ユーザー情報を抜き出してシートに保管
   if (eventType === "follow") {
-
+    logSheet.getRange(1, 1).setValue("followイベント分岐OK");
     //ユーザーリストシートを取得
-    var userListSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("userList");
+    var userListSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
+      "userList"
+    );
 
     // ユーザーIDを取得
     var userId = JSON.parse(e.postData.contents).events[0].source.userId;
@@ -34,14 +38,13 @@ function doPost(e) {
     var userName = userProfile.displayName;
     var userPicture = userProfile.pictureUrl;
     var userStatusMessage = userProfile.statusMessage;
-    
-    var lastRow = userListSheet.getLastRow();
-    
-    userListSheet.getRange( lastRow, 1).setValue(userId);
-    userListSheet.getRange( lastRow, 2).setValue(userName);
-    userListSheet.getRange( lastRow, 3).setValue(userPicture);
-    userListSheet.getRange( lastRow, 4).setValue(userStatusMessage);
 
+    var lastRow = userListSheet.getLastRow();
+
+    userListSheet.getRange(lastRow + 1, 1).setValue(userId);
+    userListSheet.getRange(lastRow + 1, 2).setValue(userName);
+    userListSheet.getRange(lastRow + 1, 3).setValue(userPicture);
+    userListSheet.getRange(lastRow + 1, 4).setValue(userStatusMessage);
   }
 }
 
