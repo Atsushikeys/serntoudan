@@ -49,6 +49,7 @@ function doPost(e) {
     var userNameColumn = 2;
     var userPhotoColumn = 3;
     var userStatusMessageColumn = 4;
+    var addTimeColumn = 5;
     
     // ユーザーIDを取得
     var userId = JSON.parse(e.postData.contents).events[0].source.userId;
@@ -95,6 +96,7 @@ function doPost(e) {
     userListSheet
     .getRange(lastRow + 1, userStatusMessageColumn)
     .setValue(userStatusMessage);
+    userListSheet.getRange(lastRow + 1, addTimeColumn).setValue(startTime);
   }
   
   //処理終了時間
