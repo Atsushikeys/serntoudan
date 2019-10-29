@@ -6,8 +6,12 @@ function get84Spas() {
   var spaListSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("銭湯リスト作成用");
   var arr = [];
   
-  for (var i = 44; i < 85; i++) {
-    spaListSheet.getRange(i + 1, 2).setValue(scrapeOneSpaName(i));
+  for (var i = 1; i < 85; i++) {
+    try {
+      spaListSheet.getRange(i + 1, 2).setValue(scrapeOneSpaName(i));
+    } catch (ex) {
+      spaListSheet.getRange(i + 1, 2).setValue(i + "行目は存在しないページ");
+    }
   }
   Logger.log(arr);
 }
