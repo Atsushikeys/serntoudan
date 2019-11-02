@@ -128,29 +128,3 @@ function getUserInfo(userId) {
   return UrlFetchApp.fetch(getProfileUrl, options);
 }
 
-//msgTextをsendToIDに送る関数
-function msgSender(msgText, sendToID) {
-  //投稿データを作成
-  var postData = {
-    to: sendToID,
-    messages: [
-      {
-        type: "text",
-        text: msgText
-      }
-    ]
-  };
-  
-  var url = "https://api.line.me/v2/bot/message/push";
-  var headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + ACCESS_TOKEN
-  };
-  
-  var options = {
-    method: "post",
-    headers: headers,
-    payload: JSON.stringify(postData)
-  };
-  var response = UrlFetchApp.fetch(url, options);
-}
