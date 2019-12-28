@@ -15,11 +15,11 @@ var testSendngUserIDIndex = 11;
 function sendWeeklySpaSuggestionBroadcast(){
   
   // メッセージ本文を作成
-  var text = JSON.parse(getUserInfo(arrUserID[i])).displayName +  " さん、こんにちは！ \n";
+  var text = JSON.parse(getUserInfo(arrUserID[testSendngUserIDIndex])).displayName +  " さん、こんにちは！ \n";
   text += " \n";
   text += "";
 
-  msgSender(text,arrUserID[testSendngUserIDIndex]);
+  //msgSender(text,arrUserID[testSendngUserIDIndex]);
 
   
 }
@@ -31,7 +31,14 @@ function notifyBeforeThursdayBroadcast() {
   for(var i = 0 ; i < arrUserID.length ; i++){
     var text = JSON.parse(getUserInfo(arrUserID[i])).displayName +  " さん、こんにちは！ \n";
     text += "本日はぶちラヂヲの配信日です！\n";
-    text += "銭湯好き男子3人のゆるーいトークを、是非ご覧下さい(　･∀･)ﾉ \n";
+    text += "古民家飲食店BUCHIに集まった、銭湯好き達のゆるーいトークを、是非お楽しみ下さい(　･∀･)ﾉ \n";
+    
+
+    // text += "本日はぶちラヂヲの配信日です！\n";
+    // text += "今日は銭湯談はお休みですが、特別日程で「つんくんの部屋」をお届けします！\n";
+    // text += "いつものにぎやかな雰囲気とはちょっと違う雰囲気をお楽しみ下さい！\n";
+    // text += "もしかしたら特別ゲストも参加するかも！？！？\n";
+    
     text += "https://www.showroom-live.com/89f723462133";
     
     msgSender(text,arrUserID[i]);

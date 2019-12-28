@@ -1,7 +1,7 @@
 //このファイル内の関数群は銭湯リストを取得する時のみ使用
 
 
-//1~84の銭湯名を取得する
+//1~84の銭湯情報を取得する
 function get84Spas() {
   var spaListSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("銭湯リスト作成用");
   
@@ -17,7 +17,7 @@ function get84Spas() {
 
 
 
-//https://aichi1010.jp/page/detail/l/spaUrrNumber に含まれる銭湯情報をスクレイピングする関数
+// https://aichi1010.jp/page/detail/l/spaUrlNumber に含まれる銭湯情報をスクレイピングする関数
 // 2019/10/30 リファクタ案 => urlをforのカウンタから生成するのではなく、sheetのurlカラムを取ってくるようにすれば、順番が変わっても関係ない。
 function scrapeOneSpa(spaUrl){
   
