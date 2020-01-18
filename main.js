@@ -114,7 +114,7 @@ function doPost(e) {
 //ユーザー情報抜き出し
 function getUserInfo(userId) {
   //ユーザーIDからプロフィール情報を抜き出すリクエストURL
-  var getProfileUrl = "https://api.line.me/v2/bot/profile/" + userId;
+  var profileUrl = "https://api.line.me/v2/bot/profile/" + userId;
   //ユーザー情報をGetするためのhttpリクエストを作成するためのヘッダとボディを作成
   var headers = {
     "Content-Type": "application/json",
@@ -125,6 +125,6 @@ function getUserInfo(userId) {
     headers: headers
   };
   
-  return UrlFetchApp.fetch(getProfileUrl, options);
+  return UrlFetchApp.fetch(profileUrl, options);
 }
 
