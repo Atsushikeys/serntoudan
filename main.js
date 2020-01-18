@@ -122,7 +122,8 @@ function getUserInfo(userId) {
   };
   var options = {
     method: "get",
-    headers: headers
+    headers: headers,
+    muteHttpExceptions: true
   };
   
   return UrlFetchApp.fetch(profileUrl, options);
