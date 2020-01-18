@@ -59,14 +59,12 @@ function pickSuggestOneSpa() {
   var arrVisited = arrSpaInfo.filter(function(item) {
     return item[visitedCheckboxColumnIndex] === true;
   });
-  Logger.log(arrVisited);
   // 訪問済み銭湯リストの中から、未配信銭湯リストを取得
   var arrNotBroadcast = arrVisited.filter(function(item) {
     return item[alreadyBroadcastColumnIndex] === false;
   });
-  Logger.log(arrNotBroadcast);
 
-  // 未配信銭湯リストがない場合、銭湯リストの未配信チェックリストを全てfalseにする
+  // 未配信銭湯リストがない場合、銭湯リストの未配信チェックリストを全てfalseにして、もう一度訪問済み銭湯を取得
   if (arrNotBroadcast.length === 0) {
     arrSpaInfo.forEach(function(item) {
       //"noninfo"回避のためセルの値がtrueのみ編集
@@ -74,11 +72,25 @@ function pickSuggestOneSpa() {
         item[alreadyBroadcastColumnIndex] = false;
       }
     });
+    // スプレッドシートに反映
     spaListSheet.getRange(2, 1, spaListSheetLastRow - 1, spaListSheetLastColumn).setValues(arrSpaInfo);
+    // 再度訪問済み銭湯リストを取得
+    arrNotBroadcast = arrSpaInfo.filter(function(item) {
+      return item[visitedCheckboxColumnIndex] === true;
+    });
+    // 訪問済み銭湯リストの中から、未配信銭湯リストを取得
+    // 直上で全部falseにしてるので、この処理は多分いらない
+    arrNotBroadcast = arrVisited.filter(function(item) {
+      return item[alreadyBroadcastColumnIndex] === false;
+    });
   }
 
-  
+  // "0~配列の長さ-1"の範囲の乱数を取得。配列のインデックスとするのでlength + 1はしなくてよい
+  var broadCastIndex = Math.floor(Math.random() * arrNotBroadcast.length);
 
+  Logger.log(arrNotBroadcast[broadCastIndex]);
+
+  return arrNotBroadcast[broadCastIndex];
 }
 
 //msgTextをsendToIDに送るメソッド
